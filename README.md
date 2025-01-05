@@ -47,4 +47,4 @@ Steps Involved
 4.Compression: Each character in the input file is replaced by its corresponding Huffman code, resulting in a compressed binary representation.
 Writing the Compressed File: The final step is to write the compressed data to an output file.
 
-OUTPUT:
+OUTPUT: https://github.com/user-attachments/assets/07b8dca6-2e04-4950-aaed-41b3be5a7315" 
