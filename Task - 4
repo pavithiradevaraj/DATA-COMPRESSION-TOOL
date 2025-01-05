@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <string.h>
+
+// Function to perform Run-Length Encoding (RLE)
+void runLengthEncode(const char *input, char *output) {
+    int count;
+    char currentChar;
+    int index = 0; // Index for the output string
+
+    for (int i = 0; i < strlen(input); i++) {
+        currentChar = input[i];
+        count = 1;
+
+        // Count consecutive occurrences of the current character
+        while (i + 1 < strlen(input) && input[i] == input[i + 1]) {
+            count++;
+            i++;
+        }
+
+        // Append the character and its count to the output string
+        output[index++] = currentChar;
+        index += sprintf(output + index, "%d", count);
+    }
+
+    output[index] = '\0'; // Null-terminate the output string
+}
+
+// Function to perform Run-Length Decoding (RLD)
+void runLengthDecode(const char *input, char *output) {
+    int index = 0; // Index for the output string
+    int i = 0; // Index for the input string
+
+    while (i < strlen(input)) {
+        char currentChar = input[i++];
+        int count = 0;
+
+        // Extract the count of the current character
+        while (i < strlen(input) && isdigit(input[i])) {
+            count = count * 10 + (input[i++] - '0');
+        }
+
+        // Append the character 'count' times to the output string
+        for (int j = 0; j < count; j++) {
+            output[index++] = currentChar;
+        }
+    }
+
+    output[index] = '\0'; // Null-terminate the output string
+}
+
+int main() {
+    char input[1000], encoded[1000], decoded[1000];
+
+    printf("Enter the string to compress: ");
+    scanf("%s", input);
+
+    // Perform Run-Length Encoding
+    runLengthEncode(input, encoded);
+    printf("Encoded string: %s\n", encoded);
+
+    // Perform Run-Length Decoding
+    runLengthDecode(encoded, decoded);
+    printf("Decoded string: %s\n", decoded);
+
+    return 0;
+}
